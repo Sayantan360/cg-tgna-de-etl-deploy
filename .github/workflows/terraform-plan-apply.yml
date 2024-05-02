@@ -47,24 +47,28 @@ jobs:
           with:
             terraform_version: 1.4.6
 
-        - name: Terraform Init
-          id: init
-          run: terraform init
-
         - name: Terraform Format
           id: format
           run: terraform fmt -check
 
+        - name: Terraform Init
+          id: init
+          run: terraform init
+
+        - name: Terraform Validate
+          id: validate
+          run: terraform validate
+
         - name: Terraform Plan
           id: plan
-          run: terraform plan -input=false
+          run: terraform plan -no-color
 
-        - name: Terraform Plan
+        - name: Terraform Plan Status
+          id: plan-status
           if: steps.plan.outcome == 'failure'
           run: exit 1
-
-        # On push to "main", deploy the Terraform infrastructure
+          
         - name: Terraform Apply
           id : apply
           working-directory: ${{ github.event.inputs.tfpath }}
-          run: terraform apply -auto-approve -input=false
+          run: terraform apply -auto-approve
