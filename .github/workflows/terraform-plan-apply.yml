@@ -7,6 +7,13 @@ on:
         #   description: 'TF File Path'     
         #   required: false
         #   default: 'infra-templates/main'
+
+        # s3_name:
+        #   description: 'S3 bucket name'
+        #   required: false
+        #   default: tgnas3bucket1
+        #   type: string
+
         environment:
             type: choice
             description: 'Select environment to deploy'
@@ -48,9 +55,10 @@ jobs:
             terraform_version: 1.4.6
             terraform_wrapper: false
 
-        # - name: Terraform Format
-        #   id: format
-        #   run: terraform fmt -check
+        - name: Terraform Format
+          id: format
+          run: terraform fmt -check
+          continue-on-error: true
 
         - name: Terraform Init
           id: init
@@ -71,4 +79,6 @@ jobs:
 
         - name: Terraform Apply
           id : apply
+          env:
+            bucket_name: ${{ vars.BUCKET_NAME }}
           run: terraform apply -auto-approve
