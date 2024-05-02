@@ -20,7 +20,8 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "testtgnabucket1"
+  bucket = var.bucket_name
+  force_destroy = true
 
 #   tags = {
 #     Name = "My bucket"
