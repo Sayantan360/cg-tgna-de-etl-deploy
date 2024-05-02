@@ -1,0 +1,8 @@
+name: Deploy Infrastructure
+
+on:
+  workflow dispatch:
+
+permissions:
+    id-token: write
+    contents: read
