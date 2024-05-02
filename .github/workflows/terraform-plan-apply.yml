@@ -7,6 +7,15 @@ on:
           description: 'TF File Path'     
           required: false
           default: 'infra-templates/main'
+        environments:
+            type: choice
+            description: 'Select environment to deploy'
+            options: 
+                - 'dev'
+                - 'preprod'
+                - 'prod'
+            required: false
+            default: 'none'
 
 permissions:
     id-token: write
@@ -16,12 +25,16 @@ jobs:
   terraform-deploy:
     name: Deploy Infra
     runs-on: ubuntu-latest
+
+    environment: 
+      name: ${{ github.event.inputs.environment }}
+
     steps:
         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         - name: Checkout code from main branch
           uses: actions/checkout@v2
 
-        # Configure AWS Credential
+        # Configure AWS Credentials
         - name: Configure AWS Credentials
           uses: aws-actions/configure-aws-credentials@v1
           with:
