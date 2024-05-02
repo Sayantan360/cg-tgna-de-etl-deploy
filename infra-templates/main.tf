@@ -11,7 +11,7 @@ terraform {
   backend "s3" {
        bucket = "sayantp-backend"
        key    = "sayantp-backend.tfstate"
-       region = "east-us-1"
+       region = "us-east-1"
    }
 }
 
