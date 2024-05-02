@@ -1,8 +1,57 @@
 name: Deploy Infrastructure
 
 on:
-  workflow dispatch:
+  workflow_dispatch:
+    inputs:
+        tfpath:
+          description: 'TF File Path'     
+          required: false
+          default: 'infra-templates/main'
 
 permissions:
     id-token: write
     contents: read
+
+jobs:
+  terraform-deploy:
+    name: Deploy Infra
+    runs-on: ubuntu-latest
+    steps:
+        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        - name: Checkout code from main branch
+          uses: actions/checkout@v2
+
+        # Configure AWS Credential
+        - name: Configure AWS Credentials
+          uses: aws-actions/configure-aws-credentials@v1
+          with:
+            aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
+            aws-region: ${{ secrets.AWS_REGION }}
+
+        - name: Setup Terraform
+          uses: hashicorp/setup-terraform@v2
+          with:
+            terraform_version: 1.4.6
+
+        - name: Terraform Init
+          id: init
+          run: terraform init
+
+        - name: Terraform Format
+          id: format
+          run: terraform fmt -check
+
+        - name: Terraform Plan
+          id: plan
+          run: terraform plan -input=false
+
+        - name: Terraform Plan
+          if: steps.plan.outcome == 'failure'
+          run: exit 1
+
+        # On push to "main", deploy the Terraform infrastructure
+        - name: Terraform Apply
+          id : apply
+          working-directory: ${{ github.event.inputs.tfpath }}
+          run: terraform apply -auto-approve -input=false

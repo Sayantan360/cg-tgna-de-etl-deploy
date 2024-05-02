@@ -7,6 +7,12 @@ terraform {
   }
 
   required_version = ">= 1.2.0"
+
+  backend "s3" {
+       bucket = "sayantp-backend"
+       key    = "sayantp-backend.tfstate"
+       region = "east-us-1"
+   }
 }
 
 provider "aws" {
@@ -17,7 +23,7 @@ resource "aws_s3_bucket" "bucket" {
   bucket = "my-tf-test-bucket"
 
 #   tags = {
-#     Name        = "My bucket"
+#     Name = "My bucket"
 #     Environment = "Dev"
 #   }
 }
