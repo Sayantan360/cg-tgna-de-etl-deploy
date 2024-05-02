@@ -3,10 +3,10 @@ name: Deploy Infrastructure
 on:
   workflow_dispatch:
     inputs:
-        tfpath:
-          description: 'TF File Path'     
-          required: false
-          default: 'infra-templates/main'
+        # tfpath:
+        #   description: 'TF File Path'     
+        #   required: false
+        #   default: 'infra-templates/main'
         environment:
             type: choice
             description: 'Select environment to deploy'
@@ -67,8 +67,7 @@ jobs:
           id: plan-status
           if: steps.plan.outcome == 'failure'
           run: exit 1
-          
+
         - name: Terraform Apply
           id : apply
-          working-directory: ${{ github.event.inputs.tfpath }}
           run: terraform apply -auto-approve
