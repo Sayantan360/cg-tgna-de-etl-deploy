@@ -19,9 +19,9 @@ provider "aws" {
   region  = "us-east-1"
 }  
 
-variable "vcenter_user" {}
+variable "bucket_name" {}
 
 module  "tf-state" {
     source = "./modules/tf-state"
-    bucket_name = env.bucket_name
+    bucket_name = var.bucket_name
 }
