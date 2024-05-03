@@ -36,6 +36,9 @@ jobs:
       TF_VAR_bucket_name: ${{ vars.BUCKET_NAME }}
     environment: 
       name: ${{ github.event.inputs.environment }}
+    defaults:
+      run:
+        working-directory: tf-infra-deploy-v1
 
     steps:
         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
