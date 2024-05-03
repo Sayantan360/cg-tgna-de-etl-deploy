@@ -6,6 +6,6 @@ resource "aws_s3_bucket" "bucket" {
 resource "aws_s3_object" "file" {
   bucket = "aws_s3_bucket.bucket.id"
   key    = "glue_script.py"
-  source = "src/glue_script.py"
+  source = "./glue_script.py"
 
 }
