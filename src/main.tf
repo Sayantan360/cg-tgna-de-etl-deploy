@@ -21,5 +21,5 @@ provider "aws" {
 
 module  "tf-state" {
     source = "./modules/tf-state"
-    bucket_name = TF_VAR_bucket_name
+    bucket_name = "tgnas3bucket1"
 }
