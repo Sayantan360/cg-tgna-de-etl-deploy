@@ -10,7 +10,7 @@ terraform {
 
   backend "s3" {
        bucket = "sayantp-backend"
-       key    = "sayantp-backend.tfstate"
+       key    = "statefile/terraform.tfstate"
        region = "us-east-1"
    }
 }
@@ -21,15 +21,15 @@ provider "aws" {
 
 variable "bucket_name" {}
 
-module  "tf-state" {
+module  "s3" {
     source = "./modules/s3"
     bucket_name = var.bucket_name
 }
 
-module  "tf-state" {
+module  "iam" {
     source = "./modules/iam"
 }
 
-module  "tf-state" {
+module  "glue" {
     source = "./modules/glue"
 }
