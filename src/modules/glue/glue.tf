@@ -1,5 +1,5 @@
 resource "aws_glue_catalog_database" "glue_db" {
-  name = "MyCatalogDatabase"
+  name = "catalogdatabase"
 }
 
 resource "aws_glue_crawler" "events_crawler" {
