@@ -15,7 +15,7 @@ resource "aws_s3_object" "file" {
 
 }
 
-resource "aws_s3_object" "file" {
+resource "aws_s3_object" "file2" {
   bucket = aws_s3_bucket.mybucket2.id
   key    = "areas.json"
   source = "./areas.json"
