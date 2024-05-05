@@ -22,6 +22,14 @@ provider "aws" {
 variable "bucket_name" {}
 
 module  "tf-state" {
-    source = "./modules/tf-state"
+    source = "./modules/s3"
     bucket_name = var.bucket_name
+}
+
+module  "tf-state" {
+    source = "./modules/iam"
+}
+
+module  "tf-state" {
+    source = "./modules/glue"
 }
