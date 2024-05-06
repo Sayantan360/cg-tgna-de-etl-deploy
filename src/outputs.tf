@@ -1,6 +1,11 @@
-output "glue_role" {
+output "glue_role_arn" {
   description = "ARN of Glue Role"
   value       = module.iam.glue_role_arn
+}
+
+output "glue_role_name" {
+  description = "ARN of Glue Role"
+  value       = module.iam.glue_role_name
 }
 
 output "mybucket" {

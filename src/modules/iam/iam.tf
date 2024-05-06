@@ -24,7 +24,7 @@ resource "aws_iam_role_policy_attachment" "glue-role-policy-attachment" {
     "arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole", 
     "arn:aws:iam::aws:policy/AmazonS3FullAccess"
   ])
-  role       = "${glue_role.name}"
+  role       = var.glue_role_name
   policy_arn = each.value
 }
 
