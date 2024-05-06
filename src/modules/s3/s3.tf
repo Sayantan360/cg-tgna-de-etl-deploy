@@ -4,7 +4,7 @@ resource "aws_s3_bucket" "mybucket" {
 }
 
 resource "aws_s3_bucket" "mybucket2" {
-  bucket = "tgnas3crawlbucket"
+  bucket = "tgnas3crawlbucket1"
   force_destroy = true
 }
 
