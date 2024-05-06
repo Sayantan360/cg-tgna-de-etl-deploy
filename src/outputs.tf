@@ -1,6 +1,6 @@
 output "glue_role" {
   description = "ARN of Glue Role"
-  value       = module.glue.glue_role_arn
+  value       = module.iam.glue_role_arn
 }
 
 output "mybucket" {
