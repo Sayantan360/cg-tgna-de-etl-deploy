@@ -6,10 +6,10 @@ resource "aws_glue_crawler" "test_crawler" {
   database_name = aws_glue_catalog_database.glue_db.name
 #   schedule      = "cron(0 1 * * ? *)"
   name          = "test_crawler"
-  role          = module.iam.glue_role_arn
+  role          = "${outputs.glue_role.value}"
 
   s3_target {
-    path = "s3://${module.s3.mybucket2}"
+    path = "s3://${outputs.mybucket2.value}"
   }
   
   configuration = jsonencode(
