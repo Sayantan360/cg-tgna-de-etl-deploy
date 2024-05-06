@@ -32,4 +32,7 @@ module  "iam" {
 
 module  "glue" {
     source = "./modules/glue"
+    role = module.iam.glue_role_arn
+    path = module.s3.mybucket2
+
 }
