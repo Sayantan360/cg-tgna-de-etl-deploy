@@ -1,6 +1,20 @@
 resource "aws_iam_role" "glue_role" {
   name = "glue_role"
-  assume_role_policy  = data.aws_iam_policy_document.instance_assume_role_policy.json # (not shown)
+  assume_role_policy  = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "glue.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF 
   managed_policy_arns = [aws_iam_policy.AmazonS3ReadOnlyAccess.arn, aws_iam_policy.AWSGlueConsoleFullAccess.arn]
 }
 
