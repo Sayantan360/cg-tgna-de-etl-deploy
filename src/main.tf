@@ -30,6 +30,7 @@ module  "iam" {
     source = "./modules/iam"
 }
 
-module  "glue" {
-    source = "./modules/glue"
-}
+# module  "glue" {
+#     source = "./modules/glue"
+#     glue_role = 
+# }
