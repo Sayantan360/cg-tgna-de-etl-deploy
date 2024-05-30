@@ -17,10 +17,16 @@ resource "aws_iam_role" "glue_role" {
 EOF
 }
 
+variable "policy_arns" {
+  type = list(string)
+  default = ["arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole","arn:aws:iam::aws:policy/AmazonS3FullAccess"]
+}
+
 resource "aws_iam_role_policy_attachment" "glue-role-policy-attachment" {
   # for_each = toset(["arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole","arn:aws:iam::aws:policy/AmazonS3FullAccess"])
+  count = length(var.policy_arns)
   role       = aws_iam_role.glue_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"
+  policy_arn = var.policy_arns[count.index]
 }
 
 
