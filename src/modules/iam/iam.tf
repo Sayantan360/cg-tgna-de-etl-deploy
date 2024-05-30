@@ -20,11 +20,9 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "glue-role-policy-attachment" {
-  for_each = toset([
-    "arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole", 
-    "arn:aws:iam::aws:policy/AmazonS3FullAccess"  ])
+  for_each = toset(["arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole","arn:aws:iam::aws:policy/AmazonS3FullAccess"])
   role       = var.glue_role_name
-  policy_arn = each.key
+  policy_arn = each.value
 }
 
 
