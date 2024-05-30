@@ -15,8 +15,6 @@ resource "aws_iam_role" "glue_role" {
   ]
 }
 EOF
-#   managed_policy_arns = [aws_iam_policy.AmazonS3ReadOnlyAccess.arn, aws_iam_policy.AWSGlueConsoleFullAccess.arn]
-#   managed_policy_arns = ["arn:aws:iam::aws:policy/AmazonS3FullAccess", "arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"]
 }
 
 resource "aws_iam_role_policy_attachment" "glue-role-policy-attachment" {
